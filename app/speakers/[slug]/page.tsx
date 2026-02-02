@@ -1,16 +1,5 @@
-<h1>
-  <span
-    style={{
-      color: "#111",
-      backgroundColor: "#ffff00",
-      padding: "4px",
-      display: "inline-block",
-      opacity: 1,
-    }}
-  >
-    TEST TEXT — SHOULD BE VISIBLE
-  </span>
-</h1>
+export const dynamic = "force-dynamic";
+
 import { supabase } from "@/lib/supabase";
 
 export default async function SpeakerPage({
