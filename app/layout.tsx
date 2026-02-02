@@ -10,11 +10,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-white text-[#2B2B2B] antialiased leading-relaxed">
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <body className="min-h-screen flex flex-col bg-[#faf9f6] text-[#111111] antialiased leading-relaxed">
+  <Header />
+
+  {/* Main content grows to push footer down */}
+  <main className="flex-1">
+    {children}
+  </main>
+
+  <Footer />
+</body>
     </html>
   );
 }

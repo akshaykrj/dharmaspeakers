@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="w-full bg-[#FDFCF9] border-b border-[#D8D8D8] sticky top-0 z-50">
+    <header className="w-full bg-white border-b border-[#D8D8D8] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 md:px-16 py-4 flex items-center justify-between">
         
         {/* Logo */}
@@ -45,6 +45,13 @@ export default function Header() {
 >
   Request a Speaker
 </Link>
+<a
+  href="/login"
+  className="ml-6 rounded-md border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-100 transition"
+>
+  Login
+</a>
+
 
         </div>
 

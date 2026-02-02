@@ -8,7 +8,7 @@ export default function Home() {
 
     {/* TEXT */}
     <div>
-      <h1 className="text-3xl md:text-4xl font-serif leading-snug tracking-tight text-[#eba32e]">
+      <h1 className="text-3xl md:text-4xl font-serif leading-snug tracking-tight text-[#eca634]">
   An initiative to connect the world<br />
   with authentic Dharmic voices
 </h1>
