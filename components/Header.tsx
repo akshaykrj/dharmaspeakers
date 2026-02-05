@@ -3,59 +3,72 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="w-full bg-white border-b border-[#D8D8D8] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 py-4 flex items-center justify-between">
-        
-        {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
-                <Image
-                src="/logo.png"
-                alt="Dharma Speakers Bureau"
-                width={48}
-                height={48}
-                priority
+    <header className="text-[#111111] sticky top-0 z-50 bg-white border-b border-gray-200">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="flex h-20 items-center justify-between">
+          
+          {/* LEFT: Logo */}
+          <Link href="/" className="flex items-center gap-3">
+          <div className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Dharma Speakers Bureau"
+              width={40}
+              height={40}
+              priority
             />
-        <span className="font-serif text-xl text-[#cc2a2c]">
-            Dharma Speakers Bureau
-                </span>
+            
+<span className="ml-2 text-xl font-semibold tracking-wide !text-[#cd2c2e]">
+  DSB
+</span>
+</div>
+          </Link>
+
+          {/* CENTER: Navigation */}
+          <nav className="hidden md:flex items-center gap-8 text-sm text-gray-600">
+            <Link href="/about" className="hover:text-gray-900 transition">
+              About
             </Link>
+            <Link href="/speakers" className="hover:text-gray-900 transition">
+              Speakers
+            </Link>
+            <Link href="/programs" className="hover:text-gray-900 transition">
+              Programs
+            </Link>
+            <Link href="/thoughts" className="hover:text-gray-900 transition">
+              Thoughts
+            </Link>
+            <Link href="/contact" className="hover:text-gray-900 transition">
+              Contact
+            </Link>
+          </nav>
+
+          {/* RIGHT: Actions */}
+<div className="flex items-center gap-6 border-l border-gray-200 pl-6">
+  
+  <Link
+    href="/join"
+    className="rounded-md bg-[#D4A441] px-5 py-2 text-sm font-medium text-white hover:bg-[#C2953A] transition"
+  >
+    Join as a Speaker
+  </Link>
 
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/about" className="text-[#3A3A3A] hover:text-[#000000]">About</Link>
-          <Link href="/speakers" className="text-[#3A3A3A] hover:text-[#000000]">Speakers</Link>
-          <Link href="/programs" className="text-[#3A3A3A] hover:text-[#000000]">Programs</Link>
-          <Link href="/thoughts" className="text-[#3A3A3A] hover:text-[#000000]">Thoughts</Link>
-          <Link href="/contact" className="text-[#3A3A3A] hover:text-[#000000]">Contact</Link>
-        </nav>
+  <Link
+    href="/request"
+    className="rounded-md bg-[#D4A441] px-5 py-2 text-sm font-medium text-white hover:bg-[#C2953A] transition"
+  >
+    Request a Speaker
+  </Link>
 
-        {/* CTAs */}
-        <div className="flex items-center gap-4 text-sm">
-        <Link
-  href="/join"
-  className="border border-[#2B2B2B] text-[#2B2B2B] bg-transparent px-5 py-2 rounded-sm text-sm tracking-wide"
->
-  Join as a Speaker
-</Link>
-
-<Link
-  href="/request"
-  className="bg-[#D6A645] text-white px-5 py-2 rounded-sm text-sm tracking-wide"
->
-  Request a Speaker
-</Link>
-<a
-  href="/login"
-  className="ml-6 rounded-md border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-100 transition"
->
-  Login
-</a>
-
-
+  <Link
+    href="/login"
+     className="text-sm font-medium text-gray-700 hover:text-gray-900 transition"
+  >
+    Login
+  </Link>
+</div>
         </div>
-
-
       </div>
     </header>
   );

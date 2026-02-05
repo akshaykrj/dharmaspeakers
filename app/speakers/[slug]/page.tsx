@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { supabase } from "@/lib/supabase";
 
 export default async function SpeakerPage({
@@ -9,106 +7,47 @@ export default async function SpeakerPage({
 }) {
   const { slug } = await params;
 
-  const { data: speaker } = await supabase
+  const { data, error } = await supabase
     .from("speakers")
     .select("*")
     .eq("slug", slug)
-    .single();
+
+  const speaker = data?.[0];
 
   if (!speaker) {
     return (
-      <div style={{ padding: "4rem" }}>
+      <div className="max-w-3xl mx-auto py-24 text-gray-700">
         Speaker not found
       </div>
     );
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#faf9f6",
-        padding: "6rem 1.5rem",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "300px 1fr",
-          gap: "3rem",
-        }}
-      >
-        {/* PHOTO */}
-        <div>
-          <img
-            src={speaker.photo_url}
-            alt={speaker.name}
-            style={{
-              width: "100%",
-              height: "420px",
-              objectFit: "cover",
-              borderRadius: "14px",
-              display: "block",
-            }}
-          />
-        </div>
+    <main className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12">
+      <div>
+        <img
+          src={speaker.photo_url}
+          alt={speaker.full_name}
+          className="w-full rounded-xl bg-gray-200 object-cover"
+        />
+      </div>
 
-        {/* TEXT CARD */}
-        <div
-          style={{
-            backgroundColor: "#ffffff",
-            borderRadius: "14px",
-            padding: "3rem",
-            color: "#111111",
-            fontFamily: "Georgia, 'Times New Roman', serif",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "2.4rem",
-              marginBottom: "0.75rem",
-              lineHeight: "1.2",
-            }}
-          >
-            {speaker.name}
-          </h1>
+      <div>
+        <h1 className="text-3xl font-serif text-[#111111]">
+          {speaker.full_name}
+        </h1>
 
-          {speaker.current_role && (
-            <div
-              style={{
-                fontSize: "1.1rem",
-                color: "#444444",
-                marginBottom: "1.5rem",
-              }}
-            >
-              {speaker.current_role}
-            </div>
-          )}
+        {speaker.location && (
+          <p className="mt-2 text-sm text-gray-600">
+            {speaker.location}
+          </p>
+        )}
 
-          <div
-            style={{
-              width: "60px",
-              height: "1px",
-              backgroundColor: "#999999",
-              marginBottom: "2rem",
-            }}
-          />
-
-          {speaker.bio && (
-            <p
-              style={{
-                fontSize: "1rem",
-                lineHeight: "1.75",
-                color: "#222222",
-                maxWidth: "680px",
-              }}
-            >
-              {speaker.bio}
-            </p>
-          )}
-        </div>
+        {speaker.detailed_bio && (
+          <p className="mt-6 text-[17px] leading-relaxed">
+            {speaker.detailed_bio}
+          </p>
+        )}
       </div>
     </main>
   );

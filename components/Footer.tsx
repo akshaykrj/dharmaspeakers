@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#c72a2a] text-[#f5f5f5]">
+    <footer className="bg-[#C2953A] text-[#f5f5f5]">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <p className="text-sm tracking-wide">
           © 2026 Dharma Speakers Bureau

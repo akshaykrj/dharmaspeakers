@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="bg-white text-[#2B2B2B]">
+    <main className="bg-white">
 
       {/* HERO */}
 <section className="px-6 md:px-16 py-28">
@@ -8,7 +8,7 @@ export default function Home() {
 
     {/* TEXT */}
     <div>
-      <h1 className="text-3xl md:text-4xl font-serif leading-snug tracking-tight text-[#eca634]">
+      <h1 className="text-3xl md:text-4xl font-serif leading-snug tracking-tight !text-[#eba32e]">
   An initiative to connect the world<br />
   with authentic Dharmic voices
 </h1>

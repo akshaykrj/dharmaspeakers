@@ -2,6 +2,17 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+export const metadata = {
+  title: "Dharma Speakers Bureau",
+  description: "Connecting the world with authentic Dharmic voices",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+
 
 export default function RootLayout({
   children,
