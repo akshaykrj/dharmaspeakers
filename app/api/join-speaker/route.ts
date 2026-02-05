@@ -16,6 +16,7 @@ export async function POST(req: Request) {
   const message = `
 New Speaker Application
 
+
 Name: ${data.name}
 Email: ${data.email}
 Phone: ${data.phone || "N/A"}
