@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req: Request) {
   try {
@@ -44,6 +45,25 @@ Budget: ${data.budget}
 Additional Notes:
 ${data.additional_notes}
 `;
+
+    const { error: insertError } = await supabase
+      .from("speaker_requests")
+      .insert({
+        institution_name: data.institution_name,
+        contact_person: data.contact_person,
+        email: data.email,
+        engagement_type: data.engagement_type || null,
+        audience: data.audience || null,
+        date_location: data.date_location || null,
+        preferred_speaker: data.preferred_speaker || null,
+        topic: data.topic || null,
+        budget: data.budget || null,
+        additional_notes: data.additional_notes || null,
+      });
+
+    if (insertError) {
+      throw insertError;
+    }
 
     await transporter.sendMail({
       from: `"DSB Website" <${process.env.EMAIL_USER}>`,

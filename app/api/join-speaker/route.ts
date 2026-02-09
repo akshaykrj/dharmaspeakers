@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req: Request) {
   try {
@@ -54,6 +55,26 @@ ${data.affiliations_ethics}
 Statement of Interest:
 ${data.statement}
 `;
+
+    const { error: insertError } = await supabase
+      .from("speaker_applications")
+      .insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || null,
+        professional_details: data.professional_details,
+        academic_background: data.academic_background || null,
+        domains: data.domains || null,
+        speaking_details: data.speaking_details || null,
+        engagement_preferences:
+          data.engagement_preferences || null,
+        affiliations_ethics: data.affiliations_ethics || null,
+        statement: data.statement,
+      });
+
+    if (insertError) {
+      throw insertError;
+    }
 
     await transporter.sendMail({
       from: `"DSB Website" <${process.env.EMAIL_USER}>`,

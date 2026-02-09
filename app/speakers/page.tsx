@@ -9,7 +9,8 @@ export default async function SpeakersPage() {
       short_bio,
       core_knowledge_domains,
       location,
-      slug
+      slug,
+      photo_url
     `)
     .eq("public_profile", true)
     .order("full_name", { ascending: true });
@@ -48,34 +49,60 @@ export default async function SpeakersPage() {
                 key={speaker.slug}
                 className="border border-[#E6E4DF] p-6 bg-white"
               >
-                <h2 className="text-xl font-serif text-[#2B2B2B] mb-2">
-                  {speaker.full_name}
-                </h2>
+                <div className="flex gap-6">
+                  <div className="w-32 shrink-0">
+                    {speaker.photo_url ? (
+                      <img
+                        src={speaker.photo_url}
+                        alt={speaker.full_name}
+                        className="w-full aspect-square object-cover rounded-md bg-gray-200"
+                      />
+                    ) : (
+                      <div className="w-full aspect-square rounded-md bg-[#F1ECE2] flex items-center justify-center text-xl font-serif text-[#8B7C66]">
+                        {(speaker.full_name || "Speaker")
+                          .split(" ")
+                          .filter(Boolean)
+                          .slice(0, 2)
+                          .map((part) => part[0])
+                          .join("")
+                          .toUpperCase()}
+                      </div>
+                    )}
 
-                {speaker.core_knowledge_domains && (
-                  <p className="text-[14px] text-[#6A6A6A] mb-1">
-                    {speaker.core_knowledge_domains.join(", ")}
-                  </p>
-                )}
+                    <div className="mt-3 text-center">
+                      <Link
+                        href={`/speakers/${speaker.slug}`}
+                        className="inline-block text-[14px] text-[#2B2B2B] underline underline-offset-4"
+                      >
+                        View Profile
+                      </Link>
+                    </div>
+                  </div>
 
-                {speaker.location && (
-                  <p className="text-[14px] text-[#6A6A6A] mb-3">
-                    {speaker.location}
-                  </p>
-                )}
+                  <div className="flex-1">
+                    <h2 className="text-xl font-serif text-[#2B2B2B] mb-2">
+                      {speaker.full_name}
+                    </h2>
 
-                {speaker.short_bio && (
-                  <p className="text-[15px] text-[#4A4A4A] leading-relaxed mb-4">
-                    {speaker.short_bio}
-                  </p>
-                )}
+                    {speaker.core_knowledge_domains && (
+                      <p className="text-[14px] text-[#6A6A6A] mb-1">
+                        {speaker.core_knowledge_domains.join(", ")}
+                      </p>
+                    )}
 
-                <Link
-                  href={`/speakers/${speaker.slug}`}
-                  className="text-[14px] text-[#2B2B2B] underline underline-offset-4"
-                >
-                  View Profile
-                </Link>
+                    {speaker.location && (
+                      <p className="text-[14px] text-[#6A6A6A] mb-3">
+                        {speaker.location}
+                      </p>
+                    )}
+
+                    {speaker.short_bio && (
+                      <p className="text-[15px] text-[#4A4A4A] leading-relaxed">
+                        {speaker.short_bio}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </div>

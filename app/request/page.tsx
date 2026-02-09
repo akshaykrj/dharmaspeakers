@@ -1,10 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function RequestSpeakerPage() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [role, setRole] = useState<
+    "speaker" | "requestor" | "admin" | null
+  >(null);
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+
+  useEffect(() => {
+    const init = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session?.user) {
+        router.push("/login?next=/request");
+        return;
+      }
+      const userRole = session?.user?.user_metadata
+        ?.role as "speaker" | "requestor" | "admin" | undefined;
+      setRole(userRole ?? null);
+      setUserEmail(session?.user?.email || "");
+      const name =
+        (session?.user?.user_metadata?.name as
+          | string
+          | undefined) ||
+        (session?.user?.user_metadata?.full_name as
+          | string
+          | undefined) ||
+        "";
+      setUserName(name);
+    };
+    void init();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,7 +83,19 @@ export default function RequestSpeakerPage() {
             Speaker Request Form
           </h2>
 
-          {submitted ? (
+          {role !== "requestor" ? (
+            <p className="text-gray-700">
+              This form is available to requestors only.
+              Please{" "}
+              <a
+                href="/login"
+                className="text-[#b63a32] underline underline-offset-4"
+              >
+                log in
+              </a>{" "}
+              with a requestor account.
+            </p>
+          ) : submitted ? (
             <p className="text-green-700 text-lg">
               Thank you for your request. Our team will review the details and
               get back to you shortly.
@@ -58,17 +104,13 @@ export default function RequestSpeakerPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
 
               <input
-                name="institution_name"
-                required
-                placeholder="Institution Name"
-                className="w-full border border-gray-300 p-3 rounded"
-              />
-
-              <input
                 name="contact_person"
                 required
                 placeholder="Contact Person"
-                className="w-full border border-gray-300 p-3 rounded"
+                className="w-full border border-gray-300 p-3 rounded bg-gray-100 text-gray-600"
+                value={userName}
+                disabled
+                readOnly
               />
 
               <input
@@ -76,6 +118,16 @@ export default function RequestSpeakerPage() {
                 type="email"
                 required
                 placeholder="Contact Email"
+                className="w-full border border-gray-300 p-3 rounded bg-gray-100 text-gray-600"
+                value={userEmail}
+                disabled
+                readOnly
+              />
+
+              <input
+                name="institution_name"
+                required
+                placeholder="Institution Name"
                 className="w-full border border-gray-300 p-3 rounded"
               />
 
