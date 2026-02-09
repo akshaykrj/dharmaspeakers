@@ -1,19 +1,31 @@
 import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
-  const data = await req.json();
+  try {
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
+    if (
+      (emailUser && /^["'].*["']$/.test(emailUser)) ||
+      (emailPass && /^["'].*["']$/.test(emailPass))
+    ) {
+      console.warn(
+        "join-speaker warning: EMAIL_USER or EMAIL_PASS appears to be wrapped in quotes. Remove the quotes from the env value."
+      );
+    }
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+    const data = await req.json();
 
-  const message = `
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: emailUser,
+        pass: emailPass,
+      },
+    });
+
+    const message = `
 New Speaker Application
 
 
@@ -43,12 +55,23 @@ Statement of Interest:
 ${data.statement}
 `;
 
-  await transporter.sendMail({
-    from: `"DSB Website" <${process.env.EMAIL_USER}>`,
-    to: "dsb@dharma360.com",
-    subject: "New Speaker Application – DSB",
-    text: message,
-  });
+    await transporter.sendMail({
+      from: `"DSB Website" <${process.env.EMAIL_USER}>`,
+      to: "jha.akshay.kr@gmail.com",
+      subject: "New Speaker Application – DSB",
+      text: message,
+    });
 
-  return new Response(JSON.stringify({ success: true }), { status: 200 });
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
+  } catch (error) {
+    console.error("join-speaker error:", error);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error:
+          error instanceof Error ? error.message : "Unknown error",
+      }),
+      { status: 500 }
+    );
+  }
 }
