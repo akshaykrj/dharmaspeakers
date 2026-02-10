@@ -115,20 +115,20 @@ export default function Header() {
           </Link>
 
           {/* CENTER: Navigation */}
-          <nav className="hidden md:flex items-center gap-8 text-sm text-gray-600">
-            <Link href="/about" className="hover:text-gray-900 transition">
+          <nav className="hidden md:flex items-center gap-8 text-[15px] font-semibold text-[#2B2B2B]">
+            <Link href="/about" className="hover:text-black transition">
               About
             </Link>
-            <Link href="/speakers" className="hover:text-gray-900 transition">
+            <Link href="/speakers" className="hover:text-black transition">
               Speakers
             </Link>
-            <Link href="/programs" className="hover:text-gray-900 transition">
+            <Link href="/programs" className="hover:text-black transition">
               Programs
             </Link>
-            <Link href="/thoughts" className="hover:text-gray-900 transition">
+            <Link href="/thoughts" className="hover:text-black transition">
               Thoughts
             </Link>
-            <Link href="/contact" className="hover:text-gray-900 transition">
+            <Link href="/contact" className="hover:text-black transition">
               Contact
             </Link>
           </nav>
