@@ -3,19 +3,20 @@ export default function Home() {
     <main className="bg-white">
 
       {/* HERO */}
-<section className="px-6 md:px-16 py-16 md:py-28">
+<section className="px-6 md:px-16 py-10 md:py-28">
   <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
     {/* TEXT */}
     <div className="order-2 md:order-1">
-      <h1 className="text-2xl md:text-4xl font-serif leading-snug tracking-tight text-center md:text-left !text-[#eba32e]">
-        An initiative to connect the world<br />
+      <h1 className="text-[22px] md:text-4xl font-serif leading-snug tracking-tight text-center md:text-left !text-[#eba32e]">
+        An initiative to connect the world
+        <br className="hidden md:block" />
         with authentic Dharmic voices
       </h1>
     </div>
 
     {/* IMAGE */}
-    <div className="relative w-full h-[220px] md:h-[420px] order-1 md:order-2">
+    <div className="relative w-full h-[180px] md:h-[420px] order-1 md:order-2">
       <img
         src="/landing.png"
         alt="Dharma Speakers Bureau"
