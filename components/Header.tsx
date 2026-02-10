@@ -107,7 +107,7 @@ export default function Header() {
               priority
             />
             
-<span className="ml-2 text-left text-[13px] md:text-[14px] font-semibold tracking-normal !text-[#cd2c2e] leading-snug">
+<span className="ml-2 text-center text-[13px] md:text-[14px] font-semibold tracking-normal !text-[#cd2c2e] leading-snug">
   <span className="block">Dharma</span>
   <span className="block">Speakers Bureau</span>
 </span>
