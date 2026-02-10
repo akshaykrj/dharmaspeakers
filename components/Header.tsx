@@ -116,7 +116,7 @@ export default function Header() {
           </Link>
 
           {/* CENTER: Navigation */}
-          <nav className="hidden md:flex items-center gap-8 text-[15px] font-semibold text-[#2B2B2B]">
+          <nav className="hidden lg:flex items-center gap-8 text-[15px] font-semibold text-[#2B2B2B]">
             <Link href="/about" className="hover:text-black transition">
               About
             </Link>
@@ -135,11 +135,11 @@ export default function Header() {
           </nav>
 
           {/* RIGHT: Actions */}
-<div className="flex flex-wrap items-center gap-3 md:gap-6 border-l border-gray-200 pl-4 md:pl-6">
+<div className="flex flex-wrap items-center gap-3 lg:gap-6 border-l border-gray-200 pl-4 lg:pl-6">
   <button
     type="button"
     onClick={() => setMobileOpen(true)}
-    className="md:hidden text-gray-700 hover:text-gray-900 transition"
+    className="lg:hidden text-gray-700 hover:text-gray-900 transition"
     aria-expanded={mobileOpen}
     aria-label="Open menu"
   >
@@ -162,20 +162,20 @@ export default function Header() {
   {(role !== "requestor" || !signedIn) && (
     <Link
       href="/join"
-      className="hidden md:inline-flex rounded-md bg-[#D4A441] px-3 py-2 text-xs md:text-sm font-medium text-white hover:bg-[#C2953A] transition whitespace-nowrap"
+      className="hidden lg:inline-flex rounded-md bg-[#D4A441] px-3 py-2 text-xs lg:text-sm font-medium text-white hover:bg-[#C2953A] transition whitespace-nowrap"
     >
-      <span className="hidden md:inline">Join as a Speaker</span>
-      <span className="md:hidden">Join</span>
+      <span className="hidden lg:inline">Join as a Speaker</span>
+      <span className="lg:hidden">Join</span>
     </Link>
   )}
 
   {(role === "requestor" || !signedIn) && !isRecovery && (
     <Link
       href="/request"
-      className="hidden md:inline-flex rounded-md bg-[#D4A441] px-3 py-2 text-xs md:text-sm font-medium text-white hover:bg-[#C2953A] transition whitespace-nowrap"
+      className="hidden lg:inline-flex rounded-md bg-[#D4A441] px-3 py-2 text-xs lg:text-sm font-medium text-white hover:bg-[#C2953A] transition whitespace-nowrap"
     >
-      <span className="hidden md:inline">Request a Speaker</span>
-      <span className="md:hidden">Request</span>
+      <span className="hidden lg:inline">Request a Speaker</span>
+      <span className="lg:hidden">Request</span>
     </Link>
   )}
 
@@ -184,14 +184,14 @@ export default function Header() {
       <button
         type="button"
         onClick={handleLogout}
-        className="hidden md:inline-flex text-xs md:text-sm font-medium text-gray-700 hover:text-gray-900 transition whitespace-nowrap"
+        className="hidden lg:inline-flex text-xs lg:text-sm font-medium text-gray-700 hover:text-gray-900 transition whitespace-nowrap"
       >
         Logout
       </button>
       {displayName && dashboardPath && (
         <Link
           href={dashboardPath}
-          className="hidden md:inline-flex text-left text-xs md:text-sm text-gray-700 leading-tight hover:text-gray-900 transition"
+          className="hidden lg:inline-flex text-left text-xs lg:text-sm text-gray-700 leading-tight hover:text-gray-900 transition"
         >
           <span className="block">Namaste</span>
           <span className="block">{displayName}</span>
@@ -201,7 +201,7 @@ export default function Header() {
   ) : (
     <Link
       href="/login"
-      className="hidden md:inline-flex text-xs md:text-sm font-medium text-gray-700 hover:text-gray-900 transition whitespace-nowrap"
+      className="hidden lg:inline-flex text-xs lg:text-sm font-medium text-gray-700 hover:text-gray-900 transition whitespace-nowrap"
     >
       Login
     </Link>
@@ -210,7 +210,7 @@ export default function Header() {
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden fixed inset-0 z-50">
+          <div className="lg:hidden fixed inset-0 z-50">
             <div className="absolute inset-0 bg-[#faf9f6] shadow-2xl flex flex-col">
               <div className="w-full bg-white border-b border-[#E6E4DF] p-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
