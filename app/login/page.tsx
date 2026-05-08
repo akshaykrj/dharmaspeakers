@@ -30,6 +30,7 @@ export default function LoginPage() {
 
     const pendingRole = localStorage.getItem("dsb:pendingRole");
     let role = session.user.user_metadata?.role as
+      | "admin"
       | "speaker"
       | "requestor"
       | undefined;
