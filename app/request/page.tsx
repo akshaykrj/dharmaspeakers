@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function RequestSpeakerPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [role, setRole] = useState<
@@ -38,10 +37,13 @@ export default function RequestSpeakerPage() {
           | undefined) ||
         "";
       setUserName(name);
-      setPreferredSpeaker(searchParams.get("speaker") || "");
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        setPreferredSpeaker(params.get("speaker") || "");
+      }
     };
     void init();
-  }, [router, searchParams]);
+  }, [router]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
