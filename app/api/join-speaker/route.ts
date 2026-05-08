@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const data = await req.json();
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp.office365.com",
       port: 587,
       secure: false,
       auth: {
@@ -77,8 +77,8 @@ ${data.statement}
     }
 
     await transporter.sendMail({
-      from: `"DSB Website" <${process.env.EMAIL_USER}>`,
-      to: "jha.akshay.kr@gmail.com",
+      from: `"DSB Website" <dsb@kucheria.com>`,
+      to: "dsb@kucheria.com",
       subject: "New Speaker Application – DSB",
       text: message,
     });
