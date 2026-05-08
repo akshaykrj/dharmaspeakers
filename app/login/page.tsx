@@ -171,7 +171,7 @@ export default function LoginPage() {
       return;
     }
 
-    router.push(nextPath || "/login");
+    router.push("/");
   };
 
   return (

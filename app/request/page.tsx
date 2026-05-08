@@ -17,11 +17,26 @@ export default function RequestSpeakerPage() {
 
   useEffect(() => {
     const init = async () => {
+      const requestedSpeaker =
+        typeof window !== "undefined"
+          ? new URLSearchParams(window.location.search).get(
+              "speaker"
+            ) || ""
+          : "";
+      setPreferredSpeaker(requestedSpeaker);
+
       const {
         data: { session },
       } = await supabase.auth.getSession();
       if (!session?.user) {
-        router.push("/login?next=/request");
+        const nextTarget = requestedSpeaker
+          ? `/request?speaker=${encodeURIComponent(
+              requestedSpeaker
+            )}`
+          : "/request";
+        router.push(
+          `/login?next=${encodeURIComponent(nextTarget)}`
+        );
         return;
       }
       const userRole = session?.user?.user_metadata
@@ -37,10 +52,6 @@ export default function RequestSpeakerPage() {
           | undefined) ||
         "";
       setUserName(name);
-      if (typeof window !== "undefined") {
-        const params = new URLSearchParams(window.location.search);
-        setPreferredSpeaker(params.get("speaker") || "");
-      }
     };
     void init();
   }, [router]);

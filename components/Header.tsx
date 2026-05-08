@@ -193,7 +193,7 @@ export default function Header() {
           href={dashboardPath}
           className="hidden lg:inline-flex text-left text-xs lg:text-sm text-gray-700 leading-tight hover:text-gray-900 transition"
         >
-          <span className="block">Namaste</span>
+          <span className="block whitespace-pre">Namaste </span>
           <span className="block">{displayName}</span>
         </Link>
       )}
