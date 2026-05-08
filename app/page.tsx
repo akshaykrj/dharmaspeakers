@@ -13,6 +13,20 @@ export default function Home() {
         <br className="hidden md:block" />
         with authentic Dharmic voices
       </h1>
+      <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+        <a
+          href="/speakers"
+          className="inline-flex items-center justify-center rounded-md bg-[#D4A441] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#C2953A] transition"
+        >
+          Browse Speakers
+        </a>
+        <a
+          href="/request"
+          className="inline-flex items-center justify-center rounded-md border border-[#D4A441] px-5 py-2.5 text-sm font-medium text-[#D4A441] hover:bg-[#FBF6EC] transition"
+        >
+          Request a Speaker
+        </a>
+      </div>
     </div>
 
     {/* IMAGE */}
