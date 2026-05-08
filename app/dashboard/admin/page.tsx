@@ -35,6 +35,18 @@ type SpeakerApplication = {
   created_at: string | null;
 };
 
+const STATUS_LABELS: Record<string, string> = {
+  pending: "Pending",
+  approved: "Approved",
+  rejected: "Rejected",
+};
+
+const STATUS_STYLES: Record<string, string> = {
+  pending: "bg-[#F1ECE2] text-[#6A5D49]",
+  approved: "bg-green-100 text-green-800",
+  rejected: "bg-red-100 text-red-700",
+};
+
 export default function AdminDashboardPage() {
   const [requests, setRequests] = useState<SpeakerRequest[]>([]);
   const [applications, setApplications] = useState<
@@ -42,6 +54,39 @@ export default function AdminDashboardPage() {
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [updating, setUpdating] = useState<string | null>(null);
+
+  const updateStatus = async (
+    type: "speaker-requests" | "speaker-applications",
+    id: string,
+    status: string
+  ) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.access_token) return;
+
+    setUpdating(id);
+    const res = await fetch(`/api/admin/${type}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({ id, status }),
+    });
+    setUpdating(null);
+
+    if (!res.ok) return;
+
+    if (type === "speaker-requests") {
+      setRequests((prev) =>
+        prev.map((r) => (r.id === id ? { ...r, status } : r))
+      );
+    } else {
+      setApplications((prev) =>
+        prev.map((a) => (a.id === id ? { ...a, status } : a))
+      );
+    }
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -157,9 +202,38 @@ export default function AdminDashboardPage() {
                             : "Date not available"}
                         </p>
                       </div>
-                      <span className="inline-flex w-fit rounded-full bg-[#F1ECE2] px-3 py-1 text-sm text-[#6A5D49]">
-                        {app.status || "pending"}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className={`inline-flex w-fit rounded-full px-3 py-1 text-sm ${STATUS_STYLES[app.status ?? "pending"] ?? STATUS_STYLES.pending}`}>
+                          {STATUS_LABELS[app.status ?? "pending"] ?? app.status}
+                        </span>
+                        {app.status !== "approved" && (
+                          <button
+                            disabled={updating === app.id}
+                            onClick={() => updateStatus("speaker-applications", app.id, "approved")}
+                            className="rounded px-3 py-1 text-sm bg-green-100 text-green-800 hover:bg-green-200 disabled:opacity-50"
+                          >
+                            Approve
+                          </button>
+                        )}
+                        {app.status !== "rejected" && (
+                          <button
+                            disabled={updating === app.id}
+                            onClick={() => updateStatus("speaker-applications", app.id, "rejected")}
+                            className="rounded px-3 py-1 text-sm bg-red-100 text-red-700 hover:bg-red-200 disabled:opacity-50"
+                          >
+                            Reject
+                          </button>
+                        )}
+                        {app.status !== "pending" && (
+                          <button
+                            disabled={updating === app.id}
+                            onClick={() => updateStatus("speaker-applications", app.id, "pending")}
+                            className="rounded px-3 py-1 text-sm bg-[#F1ECE2] text-[#6A5D49] hover:bg-[#e8e0d0] disabled:opacity-50"
+                          >
+                            Reset
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     <div className="mt-5 grid grid-cols-1 gap-4 text-[15px] text-gray-700 md:grid-cols-2">
@@ -292,9 +366,38 @@ export default function AdminDashboardPage() {
                             : "Date not available"}
                         </p>
                       </div>
-                      <span className="inline-flex w-fit rounded-full bg-[#F1ECE2] px-3 py-1 text-sm text-[#6A5D49]">
-                        {req.status || "new"}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className={`inline-flex w-fit rounded-full px-3 py-1 text-sm ${STATUS_STYLES[req.status ?? "pending"] ?? STATUS_STYLES.pending}`}>
+                          {STATUS_LABELS[req.status ?? "pending"] ?? req.status}
+                        </span>
+                        {req.status !== "approved" && (
+                          <button
+                            disabled={updating === req.id}
+                            onClick={() => updateStatus("speaker-requests", req.id, "approved")}
+                            className="rounded px-3 py-1 text-sm bg-green-100 text-green-800 hover:bg-green-200 disabled:opacity-50"
+                          >
+                            Approve
+                          </button>
+                        )}
+                        {req.status !== "rejected" && (
+                          <button
+                            disabled={updating === req.id}
+                            onClick={() => updateStatus("speaker-requests", req.id, "rejected")}
+                            className="rounded px-3 py-1 text-sm bg-red-100 text-red-700 hover:bg-red-200 disabled:opacity-50"
+                          >
+                            Reject
+                          </button>
+                        )}
+                        {req.status !== "pending" && (
+                          <button
+                            disabled={updating === req.id}
+                            onClick={() => updateStatus("speaker-requests", req.id, "pending")}
+                            className="rounded px-3 py-1 text-sm bg-[#F1ECE2] text-[#6A5D49] hover:bg-[#e8e0d0] disabled:opacity-50"
+                          >
+                            Reset
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     <div className="mt-5 grid grid-cols-1 gap-4 text-[15px] text-gray-700 md:grid-cols-2">
