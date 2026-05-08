@@ -161,7 +161,7 @@ export default function Header() {
     </svg>
   </button>
   
-  {(role !== "requestor" || !signedIn) && (
+  {(!signedIn || role === "requestor") && (
     <Link
       href="/join"
       className="hidden lg:inline-flex rounded-md bg-[#D4A441] px-3 py-2 text-xs lg:text-sm font-medium text-white hover:bg-[#C2953A] transition whitespace-nowrap"
@@ -276,7 +276,7 @@ export default function Header() {
               </nav>
 
               <div className="mt-auto border-t border-[#E6E4DF] pt-4 flex flex-col gap-3">
-                {(role !== "requestor" || !signedIn) && (
+                {(!signedIn || role === "requestor") && (
                   <Link
                     href="/join"
                     className="rounded-md bg-[#D4A441] px-4 py-2 text-sm font-medium text-white hover:bg-[#C2953A] transition text-center"
