@@ -45,7 +45,9 @@ export default function LoginPage() {
       localStorage.removeItem("dsb:pendingRole");
     }
 
-    if (role === "speaker") {
+    if (role === "admin") {
+      router.push("/dashboard/admin");
+    } else if (role === "speaker") {
       router.push("/dashboard/speaker");
     } else {
       router.push("/dashboard/requestor");

@@ -21,6 +21,8 @@ export default function Header() {
       ? "/dashboard/speaker"
       : role === "requestor"
       ? "/dashboard/requestor"
+      : role === "admin"
+      ? "/dashboard/admin"
       : null;
   const [isRecovery, setIsRecovery] = useState(false);
 
