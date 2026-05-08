@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function RequestSpeakerPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [role, setRole] = useState<
@@ -13,6 +14,7 @@ export default function RequestSpeakerPage() {
   >(null);
   const [userEmail, setUserEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
+  const [preferredSpeaker, setPreferredSpeaker] = useState<string>("");
 
   useEffect(() => {
     const init = async () => {
@@ -36,9 +38,10 @@ export default function RequestSpeakerPage() {
           | undefined) ||
         "";
       setUserName(name);
+      setPreferredSpeaker(searchParams.get("speaker") || "");
     };
     void init();
-  }, []);
+  }, [router, searchParams]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -105,23 +108,31 @@ export default function RequestSpeakerPage() {
 
               <input
                 name="contact_person"
-                required
                 placeholder="Contact Person"
                 className="w-full border border-gray-300 p-3 rounded bg-gray-100 text-gray-600"
                 value={userName}
                 disabled
                 readOnly
               />
+              <input
+                type="hidden"
+                name="contact_person"
+                value={userName}
+              />
 
               <input
                 name="email"
                 type="email"
-                required
                 placeholder="Contact Email"
                 className="w-full border border-gray-300 p-3 rounded bg-gray-100 text-gray-600"
                 value={userEmail}
                 disabled
                 readOnly
+              />
+              <input
+                type="hidden"
+                name="email"
+                value={userEmail}
               />
 
               <input
@@ -153,6 +164,10 @@ export default function RequestSpeakerPage() {
                 name="preferred_speaker"
                 placeholder="Preferred Speaker or Domain"
                 className="w-full border border-gray-300 p-3 rounded"
+                value={preferredSpeaker}
+                onChange={(e) =>
+                  setPreferredSpeaker(e.target.value)
+                }
               />
 
               <input
