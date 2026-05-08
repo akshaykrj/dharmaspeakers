@@ -112,10 +112,7 @@ export default function AdminDashboardPage() {
           Admin Dashboard
         </h1>
         <p className="text-gray-700 max-w-3xl">
-          Join-as-speaker submissions and speaker request
-          submissions are being captured in Supabase even while
-          SMTP is offline. You can review the incoming records
-          here.
+          View and review speaker applications and engagement requests submitted through the platform.
         </p>
       </div>
 
