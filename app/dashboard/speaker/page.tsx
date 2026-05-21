@@ -356,7 +356,8 @@ export default function SpeakerDashboard() {
             </Field>
             <div className="md:col-span-2">
               <Field label="Key Publications (one per line)">
-                <textarea rows={4} className={textareaCls} value={profile.key_publications} onChange={(e) => set("key_publications", e.target.value)} />
+                <textarea rows={4} className={textareaCls} value={profile.key_publications} onChange={(e) => set("key_publications", e.target.value)} placeholder={"Title | https://link.com\nTitle without link"} />
+                <p className="mt-1 text-xs text-gray-500">Use <span className="font-mono">Title | URL</span> to add a link, or just a title for plain text.</p>
               </Field>
             </div>
           </div>

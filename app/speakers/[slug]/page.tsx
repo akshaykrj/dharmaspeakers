@@ -16,6 +16,14 @@ function isUrl(value: string) {
   return /^https?:\/\//i.test(value);
 }
 
+function parsePublication(line: string): { title: string; url: string | null } {
+  const parts = line.split("|").map((s) => s.trim());
+  if (parts.length >= 2 && isUrl(parts[1])) {
+    return { title: parts[0], url: parts[1] };
+  }
+  return { title: line.trim(), url: null };
+}
+
 export default async function SpeakerPage({
   params,
 }: {
@@ -111,11 +119,25 @@ export default async function SpeakerPage({
               Books / Publications
             </h2>
             <ul className="space-y-3 text-[16px] leading-relaxed text-[#4A4A4A] list-disc pl-5">
-              {splitTextList(speaker.key_publications).map(
-                (publication) => (
-                  <li key={publication}>{publication}</li>
-                )
-              )}
+              {splitTextList(speaker.key_publications).map((publication) => {
+                const { title, url } = parsePublication(publication);
+                return (
+                  <li key={publication}>
+                    {url ? (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline underline-offset-4 hover:text-[#2B2B2B]"
+                      >
+                        {title}
+                      </a>
+                    ) : (
+                      title
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
         )}
