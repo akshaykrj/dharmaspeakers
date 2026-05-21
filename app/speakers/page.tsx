@@ -86,10 +86,17 @@ export default async function SpeakersPage() {
                       {speaker.full_name}
                     </h2>
 
-                    {speaker.core_knowledge_domains && (
-                      <p className="text-[14px] text-[#6A6A6A] mb-1">
-                        {speaker.core_knowledge_domains.join(", ")}
-                      </p>
+                    {speaker.core_knowledge_domains && speaker.core_knowledge_domains.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {speaker.core_knowledge_domains.map((domain: string) => (
+                          <span
+                            key={domain}
+                            className="rounded-full bg-[#F1ECE2] px-2.5 py-0.5 text-[12px] text-[#6A5D49]"
+                          >
+                            {domain}
+                          </span>
+                        ))}
+                      </div>
                     )}
 
                     {speaker.location && (
