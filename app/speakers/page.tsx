@@ -8,7 +8,7 @@ export default async function SpeakersPage() {
     .from("speakers")
     .select(`
       full_name,
-      short_bio,
+      current_designation,
       core_knowledge_domains,
       location,
       slug,
@@ -82,9 +82,15 @@ export default async function SpeakersPage() {
                   </div>
 
                   <div className="flex-1">
-                    <h2 className="text-xl font-serif text-[#2B2B2B] mb-2">
+                    <h2 className="text-xl font-serif text-[#2B2B2B] mb-1">
                       {speaker.full_name}
                     </h2>
+
+                    {speaker.current_designation && (
+                      <p className="text-[13px] text-[#6A6A6A] mb-3 leading-snug">
+                        {speaker.current_designation}
+                      </p>
+                    )}
 
                     {speaker.core_knowledge_domains && speaker.core_knowledge_domains.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mb-3">
