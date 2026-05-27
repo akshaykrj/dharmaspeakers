@@ -105,11 +105,6 @@ export default async function SpeakersPage() {
                       </p>
                     )}
 
-                    {speaker.short_bio && (
-                      <p className="text-[15px] text-[#4A4A4A] leading-relaxed">
-                        {speaker.short_bio}
-                      </p>
-                    )}
                   </div>
                 </div>
               </div>
