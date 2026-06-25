@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* FORCE LIGHT MODE — DO NOT REMOVE */
+html {
+  color-scheme: light;
+}
+
+:root {
+  --background: #faf9f6;
+  --foreground: #111111;
+}
+
+
+/* SAFETY NET */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  color: inherit;
+}
