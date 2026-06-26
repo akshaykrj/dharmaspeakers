@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (included for deployment purposes)
 # .env*
 
+# Claude Code local config
+.claude/
+
 # vercel
 .vercel
 
