@@ -130,27 +130,28 @@ export default function SpeakerDashboard() {
 
   useEffect(() => {
     const load = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
-      if (!session?.access_token) {
-        setError("Please log in as a speaker.");
-        setLoading(false);
-        return;
-      }
+        if (!session?.access_token) {
+          setError("Please log in as a speaker.");
+          setLoading(false);
+          return;
+        }
 
-      const res = await fetch("/api/speaker/profile", {
-        headers: { Authorization: `Bearer ${session.access_token}` },
-      });
+        const res = await fetch("/api/speaker/profile", {
+          headers: { Authorization: `Bearer ${session.access_token}` },
+        });
 
-      const json = await res.json();
+        const json = await res.json();
 
-      if (!res.ok) {
-        setError(json.error || "Unable to load profile.");
-        setLoading(false);
-        return;
-      }
+        if (!res.ok) {
+          setError(json.error || "Unable to load profile.");
+          setLoading(false);
+          return;
+        }
 
       const d = json.data ?? {};
       setProfile({
@@ -195,6 +196,10 @@ export default function SpeakerDashboard() {
         media_mentions: d.media_mentions ?? "",
       });
       setLoading(false);
+    } catch {
+      setError("Unable to load profile. Please try again.");
+      setLoading(false);
+    }
     };
 
     void load();
