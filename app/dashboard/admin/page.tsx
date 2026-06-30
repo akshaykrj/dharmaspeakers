@@ -90,61 +90,66 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     const load = async () => {
-      setLoading(true);
-      setError(null);
+      try {
+        setLoading(true);
+        setError(null);
 
-      const {
-        data: { session },
-        error: sessionError,
-      } = await supabase.auth.getSession();
+        const {
+          data: { session },
+          error: sessionError,
+        } = await supabase.auth.getSession();
 
-      if (sessionError || !session?.access_token) {
-        setError("Please log in with an admin account.");
+        if (sessionError || !session?.access_token) {
+          setError("Please log in with an admin account.");
+          setLoading(false);
+          return;
+        }
+
+        const role = session.user.user_metadata?.role;
+        if (role !== "admin") {
+          setError("This dashboard is available to admins only.");
+          setLoading(false);
+          return;
+        }
+
+        const headers = {
+          Authorization: `Bearer ${session.access_token}`,
+        };
+
+        const [requestsRes, applicationsRes] = await Promise.all([
+          fetch("/api/admin/speaker-requests", { headers }),
+          fetch("/api/admin/speaker-applications", { headers }),
+        ]);
+
+        const [requestsJson, applicationsJson] = await Promise.all([
+          requestsRes.json(),
+          applicationsRes.json(),
+        ]);
+
+        if (!requestsRes.ok) {
+          setError(
+            requestsJson.error || "Unable to load speaker requests."
+          );
+          setLoading(false);
+          return;
+        }
+
+        if (!applicationsRes.ok) {
+          setError(
+            applicationsJson.error ||
+              "Unable to load speaker applications."
+          );
+          setLoading(false);
+          return;
+        }
+
+        setRequests(requestsJson.data || []);
+        setApplications(applicationsJson.data || []);
         setLoading(false);
-        return;
-      }
-
-      const role = session.user.user_metadata?.role;
-      if (role !== "admin") {
-        setError("This dashboard is available to admins only.");
+      } catch {
+        setError("Unable to load dashboard. Please try again.");
         setLoading(false);
-        return;
       }
-
-      const headers = {
-        Authorization: `Bearer ${session.access_token}`,
-      };
-
-      const [requestsRes, applicationsRes] = await Promise.all([
-        fetch("/api/admin/speaker-requests", { headers }),
-        fetch("/api/admin/speaker-applications", { headers }),
-      ]);
-
-      const [requestsJson, applicationsJson] = await Promise.all([
-        requestsRes.json(),
-        applicationsRes.json(),
-      ]);
-
-      if (!requestsRes.ok) {
-        setError(
-          requestsJson.error || "Unable to load speaker requests."
-        );
-        setLoading(false);
-        return;
-      }
-
-      if (!applicationsRes.ok) {
-        setError(
-          applicationsJson.error ||
-            "Unable to load speaker applications."
-        );
-        setLoading(false);
-        return;
-      }
-
-      setRequests(requestsJson.data || []);
-      setApplications(applicationsJson.data || []);
-      setLoading(false);
     };
 
     void load();
