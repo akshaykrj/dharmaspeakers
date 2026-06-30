@@ -3,7 +3,7 @@ export default function Home() {
     <main className="bg-white">
 
       {/* HERO */}
-<section className="px-6 md:px-16 py-10 md:py-28">
+<section className="px-6 md:px-16 py-10 min-h-screen flex items-center">
   <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
     {/* TEXT */}

@@ -174,7 +174,7 @@ export default function Header() {
   {(role === "requestor" || !signedIn) && !isRecovery && (
     <Link
       href="/request"
-      className="hidden lg:inline-flex rounded-md bg-[#D4A441] px-3 py-2 text-xs lg:text-sm font-medium text-white hover:bg-[#C2953A] transition whitespace-nowrap"
+      className="hidden lg:inline-flex rounded-md bg-[#cc0000] px-3 py-2 text-xs lg:text-sm font-medium text-white hover:bg-[#aa0000] transition whitespace-nowrap"
     >
       <span className="hidden lg:inline">Request a Speaker</span>
       <span className="lg:hidden">Request</span>
