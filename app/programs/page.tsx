@@ -34,22 +34,22 @@ export default function ProgramsPage() {
               <div className="border border-[#E6E4DF] bg-white rounded-md p-5 flex gap-4 items-start">
                 <img src="https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/rohitarya.jpg" alt="Rohit Arya" className="w-16 h-16 rounded-full object-cover shrink-0" />
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-[#D4A441] mb-1">Dharma Live Webinar</p>
+                  <p className="text-xs font-medium uppercase tracking-wide text-[#D4A441] mb-1">DharmaLIVE Webinar</p>
                   <h3 className="text-lg font-serif text-[#111111] mb-1">
-                    Where does Spiritual Development happen? In a cave or market place
+                    Cave or Marketplace? Where Does Spiritual Development Truly Happen
                   </h3>
-                  <p className="text-sm text-[#6A6A6A]">Rohit Arya &nbsp;·&nbsp; 13 August 2026 &nbsp;·&nbsp; 7:30 PM</p>
+                  <p className="text-sm text-[#6A6A6A]">Rohit Arya &nbsp;·&nbsp; 13 August 2026 &nbsp;·&nbsp; 7:00 AM PST &nbsp;·&nbsp; 7:30 PM IST</p>
                 </div>
               </div>
 
               <div className="border border-[#E6E4DF] bg-white rounded-md p-5 flex gap-4 items-start">
                 <img src="https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/ami.webp" alt="Ami Ganatra" className="w-16 h-16 rounded-full object-cover shrink-0" />
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-[#D4A441] mb-1">Dharma Live Webinar</p>
+                  <p className="text-xs font-medium uppercase tracking-wide text-[#D4A441] mb-1">DharmaLIVE Webinar</p>
                   <h3 className="text-lg font-serif text-[#111111] mb-1">
-                    Why Are We This Way: A Guide to Hindu Shastras
+                    Why Are We This Way? A Guide to Hindu Shastras
                   </h3>
-                  <p className="text-sm text-[#6A6A6A]">Ami Ganatra &nbsp;·&nbsp; 10 September 2026 &nbsp;·&nbsp; 7:30 PM</p>
+                  <p className="text-sm text-[#6A6A6A]">Ami Ganatra &nbsp;·&nbsp; 10 September 2026 &nbsp;·&nbsp; 7:00 AM PST &nbsp;·&nbsp; 7:30 PM IST</p>
                 </div>
               </div>
 
@@ -80,8 +80,7 @@ export default function ProgramsPage() {
             <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4">
                 {[
                   { title: "Living with Purpose (Purushartha)", speaker: "Shivakumar G V", index: 1, videoId: "nCB-KEyZGhQ", photo: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/shivakumar.jpeg" },
-                  { title: "The Decision That Changes Everything — Ram vs Ravan", speaker: "Dr. Vishwananth M.V. Guha", index: 2, videoId: "FevtxTk7s_8", photo: null },
-                  { title: "Dharma, Health and Leadership", speaker: "Dr. P. Rammanohar", index: 3, videoId: "9PQleyenLOw", photo: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/rammanohar.jpg" },
+{ title: "Dharma, Health and Leadership", speaker: "Dr. P. Rammanohar", index: 3, videoId: "9PQleyenLOw", photo: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/rammanohar.jpg" },
                   { title: "Leadership and Rasa in Indian Psychology of Emotion", speaker: "Dr. Shilpa Pandit", index: 4, videoId: "BDKrnRtC400", photo: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/shilpa%20pandit.jpg" },
                   { title: "The Aryan Invasion Theory: Origins, Debates, Landscape", speaker: "Amritanshu Pandey", index: 5, videoId: "xRu17aT-7Zs", photo: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/amritanshupandey.jpeg" },
                   { title: "Dissolving Caste Consciousness", speaker: "Pt. Satish K Sharma", index: 6, videoId: "uPjF3oV8io8", photo: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/satish%20sharma.jpeg" },
