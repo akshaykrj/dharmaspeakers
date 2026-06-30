@@ -33,7 +33,7 @@ export default async function SpeakersPage() {
       {/* Page Introduction */}
       <section className="max-w-5xl mx-auto px-6 pt-24 pb-12">
         <h1 className="text-3xl font-serif text-[#2B2B2B] mb-4">
-          Speakers Directory
+          Speaker Directory
         </h1>
         <p className="text-[16px] text-[#4A4A4A] max-w-3xl leading-relaxed">
           A curated directory of scholars, practitioners, and professionals
