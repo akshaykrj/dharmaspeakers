@@ -122,27 +122,6 @@ export default function ThoughtsPage() {
           </div>
         </section>
 
-        {/* TRANSCRIPTS */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="md:col-span-1">
-            <h2 className="text-2xl font-serif">
-              Transcripts
-            </h2>
-          </div>
-
-          <div className="md:col-span-2 space-y-6">
-            <p className="leading-relaxed text-gray-800">
-              Transcripts present edited textual records of selected talks,
-              dialogues, and conversations hosted by or associated with the
-              Bureau.
-            </p>
-
-            {/* Placeholder */}
-            <div className="mt-8 border border-dashed border-gray-300 rounded-lg p-6 text-sm text-gray-600">
-              Transcripts will be listed here as they are added.
-            </div>
-          </div>
-        </section>
 
       </div>
     </main>

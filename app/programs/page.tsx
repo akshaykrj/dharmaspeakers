@@ -16,20 +16,18 @@ export default function ProgramsPage() {
         </section>
 
         {/* EVENT CALENDAR */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="md:col-span-1">
-            <h2 className="text-2xl font-serif">
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-serif mb-3">
               Event Calendar
             </h2>
-          </div>
-
-          <div className="md:col-span-2 space-y-6">
             <p className="leading-relaxed text-gray-800">
               The Event Calendar presents upcoming lectures, dialogues, and
               engagements involving speakers associated with the Bureau.
             </p>
+          </div>
 
-            <div className="mt-8 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
               <div className="border border-[#E6E4DF] bg-white rounded-md p-5 flex gap-4 items-start">
                 <img src="https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/rohitarya.jpg" alt="Rohit Arya" className="w-16 h-16 rounded-full object-cover shrink-0" />
@@ -53,7 +51,6 @@ export default function ProgramsPage() {
                 </div>
               </div>
 
-            </div>
           </div>
         </section>
 
