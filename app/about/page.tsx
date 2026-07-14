@@ -2,8 +2,20 @@ export default function About() {
   return (
     <main>
 
+      {/* PAGE HEADER */}
+      <section className="px-6 md:px-16 pt-20 pb-12 bg-white">
+        <div className="max-w-6xl mx-auto max-w-3xl">
+          <h1 className="text-4xl font-serif mb-6 text-[#2B2B2B]">About</h1>
+          <p className="text-lg leading-relaxed text-gray-700">
+            The Dharma Speakers Bureau is a professional initiative to curate, support, and
+            connect speakers grounded in Dharmic knowledge with institutions and audiences
+            across the world.
+          </p>
+        </div>
+      </section>
+
       {/* PURPOSE */}
-      <section className="px-6 md:px-16 py-24 bg-white">
+      <section className="px-6 md:px-16 py-16 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-serif text-2xl md:text-3xl tracking-tight mb-10 text-[#2B2B2B]">
             Purpose

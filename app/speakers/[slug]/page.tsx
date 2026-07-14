@@ -47,7 +47,11 @@ export default async function SpeakerPage({
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12">
+    <main className="max-w-6xl mx-auto px-6 py-20">
+      <Link href="/speakers" className="inline-flex items-center gap-1 text-sm text-[#6A6A6A] hover:text-[#2B2B2B] transition mb-10">
+        ← Back to Speakers
+      </Link>
+    <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12">
       <div className="space-y-6">
         {speaker.photo_url ? (
           <img
@@ -155,25 +159,23 @@ export default async function SpeakerPage({
                   <h3 className="text-lg font-medium text-[#2B2B2B] mb-3">
                     Sample Talks
                   </h3>
-                  <ul className="space-y-2 text-[16px] text-[#4A4A4A]">
-                    {splitTextList(speaker.sample_talk_links).map(
-                      (item) => (
+                  <ul className="space-y-2 text-[16px] text-[#4A4A4A] list-disc pl-5">
+                    {splitTextList(speaker.sample_talk_links).map((item) => {
+                      const { title, url } = parsePublication(item);
+                      return (
                         <li key={item}>
-                          {isUrl(item) ? (
-                            <a
-                              href={item}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="underline underline-offset-4 hover:text-[#2B2B2B]"
-                            >
-                              {item}
+                          {url ? (
+                            <a href={url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-[#2B2B2B]">
+                              {title}
                             </a>
-                          ) : (
-                            item
-                          )}
+                          ) : isUrl(title) ? (
+                            <a href={title} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-[#2B2B2B]">
+                              {title}
+                            </a>
+                          ) : title}
                         </li>
-                      )
-                    )}
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -183,23 +185,23 @@ export default async function SpeakerPage({
                   <h3 className="text-lg font-medium text-[#2B2B2B] mb-3">
                     Media
                   </h3>
-                  <ul className="space-y-2 text-[16px] text-[#4A4A4A]">
-                    {splitTextList(speaker.media_mentions).map((item) => (
-                      <li key={item}>
-                        {isUrl(item) ? (
-                          <a
-                            href={item}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="underline underline-offset-4 hover:text-[#2B2B2B]"
-                          >
-                            {item}
-                          </a>
-                        ) : (
-                          item
-                        )}
-                      </li>
-                    ))}
+                  <ul className="space-y-2 text-[16px] text-[#4A4A4A] list-disc pl-5">
+                    {splitTextList(speaker.media_mentions).map((item) => {
+                      const { title, url } = parsePublication(item);
+                      return (
+                        <li key={item}>
+                          {url ? (
+                            <a href={url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-[#2B2B2B]">
+                              {title}
+                            </a>
+                          ) : isUrl(title) ? (
+                            <a href={title} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-[#2B2B2B]">
+                              {title}
+                            </a>
+                          ) : title}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -207,6 +209,7 @@ export default async function SpeakerPage({
           </section>
         )}
       </div>
+    </div>
     </main>
   );
 }

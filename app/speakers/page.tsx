@@ -47,9 +47,10 @@ export default async function SpeakersPage() {
         {speakers && speakers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
             {speakers.map((speaker) => (
-              <div
+              <Link
                 key={speaker.slug}
-                className="border border-[#E6E4DF] p-6 bg-white"
+                href={`/speakers/${speaker.slug}`}
+                className="border border-[#E6E4DF] p-6 bg-white hover:border-[#D4A441] transition block"
               >
                 <div className="flex gap-6">
                   <div className="w-32 shrink-0">
@@ -65,20 +66,11 @@ export default async function SpeakersPage() {
                           .split(" ")
                           .filter(Boolean)
                           .slice(0, 2)
-                        .map((part: string) => part[0])
+                          .map((part: string) => part[0])
                           .join("")
                           .toUpperCase()}
                       </div>
                     )}
-
-                    <div className="mt-3 text-center">
-                      <Link
-                        href={`/speakers/${speaker.slug}`}
-                        className="inline-block text-[14px] text-[#2B2B2B] underline underline-offset-4"
-                      >
-                        View Profile
-                      </Link>
-                    </div>
                   </div>
 
                   <div className="flex-1">
@@ -106,14 +98,13 @@ export default async function SpeakersPage() {
                     )}
 
                     {speaker.location && (
-                      <p className="text-[14px] text-[#6A6A6A] mb-3">
+                      <p className="text-[14px] text-[#6A6A6A]">
                         {speaker.location}
                       </p>
                     )}
-
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
