@@ -72,7 +72,7 @@ export default function SignupPage() {
     };
 
     void init();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
   const handleSignup = async (e: React.FormEvent) => {

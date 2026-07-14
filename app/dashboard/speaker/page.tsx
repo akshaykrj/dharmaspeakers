@@ -478,7 +478,7 @@ export default function SpeakerDashboard() {
                 className="h-4 w-4 rounded border-[#E6E4DF] accent-[#D4A441]"
               />
               <label htmlFor="ethical_commitment" className="text-sm text-[#2B2B2B]">
-                I confirm my commitment to DSB's ethical standards
+                I confirm my commitment to DSB&apos;s ethical standards
               </label>
             </div>
           </div>

@@ -1,6 +1,11 @@
+export const metadata = {
+  title: "Contact",
+  description: "Get in touch with the Dharma Speakers Bureau for general enquiries, speaker applications, or institutional requests.",
+};
+
 export default function ContactPage() {
   return (
-    <main className="bg-[#faf9f6] text-[#111111]">
+    <main>
       <div className="max-w-6xl mx-auto px-6 py-20 space-y-20">
 
         {/* PAGE HEADER */}
@@ -15,7 +20,7 @@ export default function ContactPage() {
         </section>
 
         {/* GENERAL CONTACT */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-[#E6E4DF] pt-8">
           <div className="md:col-span-1">
             <h2 className="text-2xl font-serif">
               General Contact
@@ -42,7 +47,7 @@ export default function ContactPage() {
     
 
         {/* SPEAKER ENQUIRIES */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-[#E6E4DF] pt-8">
           <div className="md:col-span-1">
             <h2 className="text-2xl font-serif">
               Speaker Enquiries
@@ -77,7 +82,7 @@ export default function ContactPage() {
         </section>
 
         {/* INSTITUTIONAL ENQUIRIES */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-[#E6E4DF] pt-8">
           <div className="md:col-span-1">
             <h2 className="text-2xl font-serif">
               Institutional Enquiries

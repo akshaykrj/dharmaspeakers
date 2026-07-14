@@ -11,6 +11,7 @@ export default function RequestSpeakerPage() {
   const [role, setRole] = useState<
     "speaker" | "requestor" | "admin" | null
   >(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [preferredSpeaker, setPreferredSpeaker] = useState<string>("");
@@ -71,6 +72,12 @@ export default function RequestSpeakerPage() {
 
     setLoading(false);
 
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      setSubmitError(body.error || "Something went wrong. Please try again.");
+      return;
+    }
+
     if (res.ok) {
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -111,17 +118,26 @@ export default function RequestSpeakerPage() {
           </h2>
 
           {role !== "requestor" && role !== "admin" ? (
-            <p className="text-gray-700">
-              This form is available to requestors only.
-              Please{" "}
-              <a
-                href="/login"
-                className="text-[#b63a32] underline underline-offset-4"
-              >
-                log in
-              </a>{" "}
-              with a requestor account.
-            </p>
+            <div className="space-y-3 text-gray-700">
+              <p>
+                To submit a speaker request, you need a <strong>requestor account</strong>.
+                This helps us track your enquiry and follow up with you directly.
+              </p>
+              <p className="flex flex-wrap gap-3 mt-4">
+                <a
+                  href="/signup"
+                  className="inline-block rounded-md bg-[#D4A441] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#C2953A] transition"
+                >
+                  Create a requestor account
+                </a>
+                <a
+                  href="/login"
+                  className="inline-block rounded-md border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                >
+                  Log in
+                </a>
+              </p>
+            </div>
           ) : submitted ? (
             <p className="text-green-700 text-lg">
               Thank you for your request. Our team will review the details and
@@ -211,6 +227,10 @@ export default function RequestSpeakerPage() {
                 placeholder="Budget (optional)"
                 className="w-full border border-gray-300 p-3 rounded"
               />
+
+              {submitError && (
+                <p className="text-red-600 text-sm">{submitError}</p>
+              )}
 
               <button
                 type="submit"

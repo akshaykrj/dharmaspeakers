@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
@@ -31,7 +32,7 @@ export default async function SpeakerPage({
 }) {
   const { slug } = await params;
 
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("speakers")
     .select("*")
     .eq("slug", slug)
@@ -54,11 +55,14 @@ export default async function SpeakerPage({
     <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12">
       <div className="space-y-6">
         {speaker.photo_url ? (
-          <img
-            src={speaker.photo_url}
-            alt={speaker.full_name}
-            className="w-full rounded-xl bg-gray-200 object-cover"
-          />
+          <div className="relative w-full aspect-square">
+            <Image
+              src={speaker.photo_url}
+              alt={speaker.full_name}
+              fill
+              className="rounded-xl bg-gray-200 object-cover"
+            />
+          </div>
         ) : (
           <div className="w-full aspect-square rounded-xl bg-[#F1ECE2] flex items-center justify-center text-5xl font-serif text-[#8B7C66]">
             {(speaker.full_name || "Speaker")

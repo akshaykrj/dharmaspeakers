@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
@@ -63,19 +64,19 @@ export default function Footer() {
         <div>
           <p className="!text-[#2B2B2B] text-sm font-medium uppercase tracking-wide mb-4">Explore</p>
           <ul className="space-y-2 text-sm">
-            <li><a href="/about" className="hover:text-[#D4A441] transition">About</a></li>
-            <li><a href="/speakers" className="hover:text-[#D4A441] transition">Speaker Directory</a></li>
-            <li><a href="/programs" className="hover:text-[#D4A441] transition">Programs</a></li>
-            <li><a href="/thoughts" className="hover:text-[#D4A441] transition">Thoughts</a></li>
+            <li><Link href="/about" className="hover:text-[#D4A441] transition">About</Link></li>
+            <li><Link href="/speakers" className="hover:text-[#D4A441] transition">Speaker Directory</Link></li>
+            <li><Link href="/programs" className="hover:text-[#D4A441] transition">Programs</Link></li>
+            <li><Link href="/thoughts" className="hover:text-[#D4A441] transition">Thoughts</Link></li>
           </ul>
         </div>
 
         <div>
           <p className="!text-[#2B2B2B] text-sm font-medium uppercase tracking-wide mb-4">Get Involved</p>
           <ul className="space-y-2 text-sm">
-            <li><a href="/request" className="hover:text-[#D4A441] transition">Request a Speaker</a></li>
-            <li><a href="/join" className="hover:text-[#D4A441] transition">Join as a Speaker</a></li>
-            <li><a href="/contact" className="hover:text-[#D4A441] transition">Contact</a></li>
+            <li><Link href="/request" className="hover:text-[#D4A441] transition">Request a Speaker</Link></li>
+            <li><Link href="/join" className="hover:text-[#D4A441] transition">Join as a Speaker</Link></li>
+            <li><Link href="/contact" className="hover:text-[#D4A441] transition">Contact</Link></li>
           </ul>
         </div>
 

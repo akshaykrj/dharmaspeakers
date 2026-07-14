@@ -109,7 +109,7 @@ export default function LoginPage() {
     };
 
     void init();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -117,7 +117,7 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });

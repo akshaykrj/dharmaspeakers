@@ -1,6 +1,11 @@
+export const metadata = {
+  title: "Thoughts",
+  description: "Essays and reflections by DSB speakers exploring Dharmic ideas across temples, civilisation, history, leadership, yoga, and Ayurveda.",
+};
+
 export default function ThoughtsPage() {
   return (
-    <main className="bg-[#faf9f6] text-[#111111]">
+    <main>
       <div className="max-w-6xl mx-auto px-6 py-20 space-y-20">
 
         {/* PAGE HEADER */}
@@ -16,7 +21,7 @@ export default function ThoughtsPage() {
         </section>
 
         {/* ESSAYS & REFLECTIONS */}
-        <section className="space-y-8">
+        <section className="space-y-8 border-t border-[#E6E4DF] pt-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="md:col-span-1">
               <h2 className="text-2xl font-serif">

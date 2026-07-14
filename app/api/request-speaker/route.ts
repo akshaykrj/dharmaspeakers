@@ -5,6 +5,13 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
 
+    if (!data.institution_name || !data.email) {
+      return NextResponse.json(
+        { success: false, error: "Institution name and email are required." },
+        { status: 400 }
+      );
+    }
+
     const { error: insertError } = await supabase
       .from("speaker_requests")
       .insert({
@@ -22,16 +29,17 @@ export async function POST(req: Request) {
 
     if (insertError) {
       console.error("Supabase insert error:", insertError);
+      return NextResponse.json(
+        { success: false, error: "Failed to save your request. Please try again." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("request-speaker error:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : "Unknown error",
-      },
+      { success: false, error: "An unexpected error occurred." },
       { status: 500 }
     );
   }

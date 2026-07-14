@@ -1,5 +1,7 @@
+import Image from "next/image";
+
 type Props = {
-  speaker: any;
+  speaker: Record<string, unknown>;
 };
 
 export default function SpeakerProfile({ speaker }: Props) {
@@ -11,11 +13,14 @@ export default function SpeakerProfile({ speaker }: Props) {
           {/* Photo */}
           <div>
             {speaker.photo_url ? (
-              <img
-                src={speaker.photo_url}
-                alt={speaker.name}
-                className="w-full rounded-2xl object-cover"
-              />
+              <div className="relative w-full aspect-[3/4]">
+                <Image
+                  src={speaker.photo_url as string}
+                  alt={speaker.name as string}
+                  fill
+                  className="rounded-2xl object-cover"
+                />
+              </div>
             ) : (
               <div className="w-full aspect-[3/4] rounded-2xl bg-gray-200 flex items-center justify-center text-sm text-gray-500 tracking-wide">
                 Speaker Photo

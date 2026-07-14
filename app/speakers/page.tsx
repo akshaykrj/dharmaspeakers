@@ -1,7 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = {
+  title: "Speaker Directory",
+  description: "Browse our curated directory of Dharmic scholars, practitioners, and educators available for lectures, panels, and workshops.",
+};
 
 export default async function SpeakersPage() {
   const { data: speakers, error } = await supabase
@@ -28,22 +34,25 @@ export default async function SpeakersPage() {
   }
 
   return (
-    <main className="bg-[#FBFAF7]">
-      
+    <main>
+
       {/* Page Introduction */}
-      <section className="max-w-5xl mx-auto px-6 pt-24 pb-12">
-        <h1 className="text-3xl font-serif text-[#2B2B2B] mb-4">
-          Speaker Directory
-        </h1>
-        <p className="text-[16px] text-[#4A4A4A] max-w-3xl leading-relaxed">
-          A curated directory of scholars, practitioners, and professionals
-          whose work engages with Dharmic thought and its contemporary
-          applications.
-        </p>
+      <section className="px-6 md:px-16">
+        <div className="max-w-6xl mx-auto pt-20 pb-12">
+          <h1 className="text-3xl font-serif text-[#2B2B2B] mb-4">
+            Speaker Directory
+          </h1>
+          <p className="text-[16px] text-[#4A4A4A] max-w-3xl leading-relaxed">
+            A curated directory of scholars, practitioners, and professionals
+            whose work engages with Dharmic thought and its contemporary
+            applications.
+          </p>
+        </div>
       </section>
 
       {/* Speaker Cards */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="px-6 md:px-16">
+        <div className="max-w-6xl mx-auto border-t border-[#E6E4DF] py-12">
         {speakers && speakers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start gap-6">
             {speakers.map((speaker) => (
@@ -55,11 +64,14 @@ export default async function SpeakersPage() {
                 <div className="flex flex-col gap-4">
                   <div className="w-full">
                     {speaker.photo_url ? (
-                      <img
-                        src={speaker.photo_url}
-                        alt={speaker.full_name}
-                        className="w-full aspect-[4/3] object-cover object-top rounded-md bg-gray-200"
-                      />
+                      <div className="relative w-full aspect-[4/3]">
+                        <Image
+                          src={speaker.photo_url}
+                          alt={speaker.full_name}
+                          fill
+                          className="object-cover object-top rounded-md bg-gray-200"
+                        />
+                      </div>
                     ) : (
                       <div className="w-full aspect-[4/3] rounded-md bg-[#F1ECE2] flex items-center justify-center text-2xl font-serif text-[#8B7C66]">
                         {(speaker.full_name || "Speaker")
@@ -112,6 +124,7 @@ export default async function SpeakersPage() {
             Speaker profiles will be published shortly.
           </p>
         )}
+        </div>
       </section>
 
     </main>
