@@ -30,10 +30,10 @@ export default function ContactPage() {
 
             <p className="text-gray-900">
               <a
-                href="mailto:dsb@kucheria.com"
+                href="mailto:dsb@dharma360.com"
                 className="underline hover:text-gray-700 transition"
               >
-                dsb@kucheria.com
+                dsb@dharma360.com
               </a>
             </p>
           </div>
@@ -58,10 +58,10 @@ export default function ContactPage() {
 
             <p className="text-gray-900">
               <a
-                href="mailto:dsb@kucheria.com"
+                href="mailto:dsb@dharma360.com"
                 className="underline hover:text-gray-700 transition"
               >
-                dsb@kucheria.com
+                dsb@dharma360.com
               </a>
             </p>
 

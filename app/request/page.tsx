@@ -60,19 +60,30 @@ export default function RequestSpeakerPage() {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const payload = Object.fromEntries(new FormData(form));
 
     const res = await fetch("/api/request-speaker", {
       method: "POST",
-      body: JSON.stringify(Object.fromEntries(formData)),
+      body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" },
     });
 
     setLoading(false);
 
     if (res.ok) {
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "142bb8a6-f864-4646-8b21-5279c2df2497",
+          subject: "New Speaker Request",
+          from_name: payload.institution_name || "DSB Website",
+          ...payload,
+        }),
+      }).catch(console.error);
       setSubmitted(true);
-      e.currentTarget.reset();
+      form.reset();
     }
   }
 
@@ -99,7 +110,7 @@ export default function RequestSpeakerPage() {
             Speaker Request Form
           </h2>
 
-          {role !== "requestor" ? (
+          {role !== "requestor" && role !== "admin" ? (
             <p className="text-gray-700">
               This form is available to requestors only.
               Please{" "}

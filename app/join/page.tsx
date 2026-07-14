@@ -10,19 +10,30 @@ export default function JoinAsSpeakerPage() {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const payload = Object.fromEntries(new FormData(form));
 
     const res = await fetch("/api/join-speaker", {
       method: "POST",
-      body: JSON.stringify(Object.fromEntries(formData)),
+      body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" },
     });
 
     setLoading(false);
 
     if (res.ok) {
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "d925cfbb-d97d-454f-a2f9-056ae7bf5347",
+          subject: "New Speaker Application – DSB",
+          from_name: payload.name || "DSB Website",
+          ...payload,
+        }),
+      }).catch(console.error);
       setSubmitted(true);
-      e.currentTarget.reset();
+      form.reset();
     }
   }
 
