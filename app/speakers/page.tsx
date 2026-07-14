@@ -43,25 +43,25 @@ export default async function SpeakersPage() {
       </section>
 
       {/* Speaker Cards */}
-      <section className="max-w-5xl mx-auto px-6 pb-24">
+      <section className="max-w-6xl mx-auto px-6 pb-24">
         {speakers && speakers.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start gap-6">
             {speakers.map((speaker) => (
               <Link
                 key={speaker.slug}
                 href={`/speakers/${speaker.slug}`}
-                className="border border-[#E6E4DF] p-6 bg-white hover:border-[#D4A441] transition block"
+                className="self-start border border-[#E6E4DF] p-4 bg-white hover:border-[#D4A441] transition block"
               >
-                <div className="flex gap-6">
-                  <div className="w-32 shrink-0">
+                <div className="flex flex-col gap-4">
+                  <div className="w-full">
                     {speaker.photo_url ? (
                       <img
                         src={speaker.photo_url}
                         alt={speaker.full_name}
-                        className="w-full aspect-square object-cover rounded-md bg-gray-200"
+                        className="w-full aspect-[4/3] object-cover object-top rounded-md bg-gray-200"
                       />
                     ) : (
-                      <div className="w-full aspect-square rounded-md bg-[#F1ECE2] flex items-center justify-center text-xl font-serif text-[#8B7C66]">
+                      <div className="w-full aspect-[4/3] rounded-md bg-[#F1ECE2] flex items-center justify-center text-2xl font-serif text-[#8B7C66]">
                         {(speaker.full_name || "Speaker")
                           .split(" ")
                           .filter(Boolean)
@@ -73,7 +73,7 @@ export default async function SpeakersPage() {
                     )}
                   </div>
 
-                  <div className="flex-1">
+                  <div>
                     <h2 className="text-xl font-serif text-[#2B2B2B] mb-1">
                       {speaker.full_name}
                     </h2>
