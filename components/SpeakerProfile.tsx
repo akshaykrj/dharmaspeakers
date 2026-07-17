@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type Props = {
-  speaker: Record<string, unknown>;
+  speaker: Record<string, string | null | undefined | string[]>;
 };
 
 export default function SpeakerProfile({ speaker }: Props) {
