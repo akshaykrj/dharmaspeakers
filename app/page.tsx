@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { upcomingEvents } from "@/lib/events";
+import { getUpcomingEvents } from "@/lib/events";
 
-export default function Home() {
+export default async function Home() {
+  const upcomingEvents = await getUpcomingEvents();
   return (
     <main>
 
@@ -47,74 +48,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED SPEAKERS */}
-      <section className="px-6 md:px-16">
-        <div className="max-w-6xl mx-auto border-t border-[#E6E4DF] py-20">
-          <div className="flex items-end justify-between mb-12">
-            <h2 className="font-serif text-3xl tracking-tight">Featured Speakers</h2>
-            <Link href="/speakers" className="text-sm text-[#D4A441] hover:underline">
-              View all →
-            </Link>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl">
-
-            {/* Ami Ganatra */}
-            <Link
-              href="/speakers/ami-ganatra"
-              className="group bg-white border border-[#E6E4DF] rounded-md p-6 hover:border-[#D4A441] transition flex flex-col gap-4"
-            >
-              <div className="relative w-full aspect-[4/3]">
-                <Image
-                  src="https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/ami.webp"
-                  alt="Ami Ganatra"
-                  fill
-                  className="object-cover object-top rounded-md"
-                />
-              </div>
-              <div>
-                <h3 className="font-serif text-xl text-[#2B2B2B] mb-1 group-hover:text-[#D4A441] transition">
-                  Ami Ganatra
-                </h3>
-                <p className="text-[13px] text-[#6A6A6A] mb-3">Author & Scholar of Hindu Shastras and Indic Traditions</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Hindu Shastras", "Indic Traditions", "Cultural History"].map((t) => (
-                    <span key={t} className="rounded-full bg-[#F1ECE2] px-2.5 py-0.5 text-[12px] text-[#6A5D49]">{t}</span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-
-            {/* Pankaj Saxena */}
-            <Link
-              href="/speakers/pankaj-saxena"
-              className="group bg-white border border-[#E6E4DF] rounded-md p-6 hover:border-[#D4A441] transition flex flex-col gap-4"
-            >
-              <div className="relative w-full aspect-[4/3]">
-                <Image
-                  src="https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/pankaj.jpeg"
-                  alt="Pankaj Saxena"
-                  fill
-                  className="object-cover object-top rounded-md"
-                />
-              </div>
-              <div>
-                <h3 className="font-serif text-xl text-[#2B2B2B] mb-1 group-hover:text-[#D4A441] transition">
-                  Pankaj Saxena
-                </h3>
-                <p className="text-[13px] text-[#6A6A6A] mb-3">Author & Scholar of Dharmic Civilization, Temples, and Culture</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Dharmic Civilization", "Temples", "Culture & Aesthetics"].map((t) => (
-                    <span key={t} className="rounded-full bg-[#F1ECE2] px-2.5 py-0.5 text-[12px] text-[#6A5D49]">{t}</span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-
-          </div>
-        </div>
-      </section>
-
       {/* UPCOMING PROGRAMS */}
       <section className="px-6 md:px-16">
         <div className="max-w-6xl mx-auto border-t border-[#E6E4DF] py-20">
@@ -126,15 +59,21 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
-            {upcomingEvents.map((event) => (
+            {upcomingEvents.slice(0, 2).map((event) => (
               <div key={event.title} className="border border-[#E6E4DF] rounded-md p-5 flex gap-4 items-start">
-                <Image
-                  src={event.photoUrl}
-                  alt={event.speaker}
-                  width={56}
-                  height={56}
-                  className="rounded-full object-cover shrink-0"
-                />
+                {event.photoUrl ? (
+                  <Image
+                    src={event.photoUrl}
+                    alt={event.speaker}
+                    width={56}
+                    height={56}
+                    className="rounded-full object-cover shrink-0"
+                  />
+                ) : (
+                  <div className="w-14 h-14 rounded-full bg-[#F1ECE2] flex items-center justify-center shrink-0 text-sm font-serif text-[#8B7C66]">
+                    {event.speaker.split(" ").map((w: string) => w[0]).slice(0, 2).join("")}
+                  </div>
+                )}
                 <div>
                   <p className="text-xs font-medium tracking-wide text-[#D4A441] mb-1">{event.type}</p>
                   <h3 className="text-base font-serif text-[#111111] mb-1 leading-snug">{event.title}</h3>

@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { upcomingEvents } from "@/lib/events";
+import { getUpcomingEvents } from "@/lib/events";
 
 export const metadata = {
   title: "Programs",
   description: "Upcoming and past programs by the Dharma Speakers Bureau — DharmaLIVE webinars, lectures, and events.",
 };
 
-export default function ProgramsPage() {
+export default async function ProgramsPage() {
+  const upcomingEvents = await getUpcomingEvents();
   return (
     <main>
       <div className="max-w-6xl mx-auto px-6 py-20 space-y-20">
@@ -38,7 +39,13 @@ export default function ProgramsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {upcomingEvents.map((event) => (
               <div key={event.title} className="bg-[#FAFAF8] border border-[#E6E4DF] rounded-md p-5 flex gap-4 items-start">
-                <Image src={event.photoUrl} alt={event.speaker} width={64} height={64} className="rounded-full object-cover shrink-0" />
+                {event.photoUrl ? (
+                  <Image src={event.photoUrl} alt={event.speaker} width={64} height={64} className="rounded-full object-cover shrink-0" />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-[#F1ECE2] flex items-center justify-center shrink-0 text-base font-serif text-[#8B7C66]">
+                    {event.speaker.split(" ").map((w: string) => w[0]).slice(0, 2).join("")}
+                  </div>
+                )}
                 <div>
                   <p className="text-xs font-medium tracking-wide text-[#D4A441] mb-1">{event.type}</p>
                   <h3 className="text-lg font-serif text-[#111111] mb-1">{event.title}</h3>

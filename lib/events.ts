@@ -1,4 +1,7 @@
+import { supabase } from "@/lib/supabase";
+
 export type Event = {
+  id: string;
   type: string;
   title: string;
   speaker: string;
@@ -8,23 +11,23 @@ export type Event = {
   timeIst: string;
 };
 
-export const upcomingEvents: Event[] = [
-  {
-    type: "DharmaLIVE Webinar",
-    title: "Cave or Marketplace? Where Does Spiritual Development Truly Happen",
-    speaker: "Rohit Arya",
-    photoUrl: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/rohitarya.jpg",
-    date: "13 August 2026",
-    timePst: "7:00 AM PST",
-    timeIst: "7:30 PM IST",
-  },
-  {
-    type: "DharmaLIVE Webinar",
-    title: "Why Are We This Way? A Guide to Hindu Shastras",
-    speaker: "Ami Ganatra",
-    photoUrl: "https://dzlcgtzpkdejfjsdndtu.supabase.co/storage/v1/object/public/Speakers/ami.webp",
-    date: "10 September 2026",
-    timePst: "7:00 AM PST",
-    timeIst: "7:30 PM IST",
-  },
-];
+export async function getUpcomingEvents(): Promise<Event[]> {
+  const { data, error } = await supabase
+    .from("events")
+    .select("id, type, title, speaker, photo_url, date, time_pst, time_ist")
+    .eq("published", true)
+    .order("created_at", { ascending: true });
+
+  if (error || !data) return [];
+
+  return data.map((row) => ({
+    id: row.id,
+    type: row.type,
+    title: row.title,
+    speaker: row.speaker,
+    photoUrl: row.photo_url ?? "",
+    date: row.date,
+    timePst: row.time_pst ?? "",
+    timeIst: row.time_ist ?? "",
+  }));
+}
