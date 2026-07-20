@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { getUpcomingEvents } from "@/lib/events";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const upcomingEvents = await getUpcomingEvents();
   return (

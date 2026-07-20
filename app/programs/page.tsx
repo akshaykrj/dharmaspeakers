@@ -6,6 +6,8 @@ export const metadata = {
   description: "Upcoming and past programs by the Dharma Speakers Bureau — DharmaLIVE webinars, lectures, and events.",
 };
 
+export const revalidate = 60;
+
 export default async function ProgramsPage() {
   const upcomingEvents = await getUpcomingEvents();
   return (

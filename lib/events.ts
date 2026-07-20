@@ -16,7 +16,7 @@ export async function getUpcomingEvents(): Promise<Event[]> {
     .from("events")
     .select("id, type, title, speaker, photo_url, date, time_pst, time_ist")
     .eq("published", true)
-    .order("created_at", { ascending: true });
+    .order("event_date", { ascending: true });
 
   if (error || !data) return [];
 
